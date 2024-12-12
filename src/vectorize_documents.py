@@ -13,6 +13,9 @@ embeddings = HuggingFaceEmbeddings(
 loader = DirectoryLoader("./data/", glob="*.txt")
 documents = loader.load()
 
+for doc in documents:
+    doc.page_content = doc.page_content.replace("\n", " ")
+
 # Splitting the documents into chunks
 text_splitter = RecursiveCharacterTextSplitter(chunk_size=1024, chunk_overlap=256)
 docs = text_splitter.split_documents(documents)
